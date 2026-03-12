@@ -26,7 +26,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file ./common/pom.xml
 
       # - name: Publish to GitHub Packages
       #   run: mvn -B deploy -s $GITHUB_WORKSPACE/settings.xml
