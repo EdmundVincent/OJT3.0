@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.collaboportal.common.jwt.repository.HealthCheckMapper">
+    <select id="getHealthCheck" resultType="Integer" parameterType="String">
+      SELECT isnull(
+	 ( SELECT 
+            COALESCE(
+                CASE 
+                    WHEN I_VALUE_CHAR = 1  THEN 400
+                    ELSE 200
+                END, 
+                200
+            ) AS I_VAL
+        FROM spnohin_info.MS_SYS_PRAM 
+        WHERE I_TYPE = #{keyWord}),200) ;
+    </select>
+</mapper>

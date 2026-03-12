@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "com.collaboportal.common.jwt.config.JwtConfig",
+      "sourceType": "com.collaboportal.common.jwt.config.JwtConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.endpoint-permissions",
+      "type": "java.util.Map<java.lang.String,java.lang.Integer>",
+      "sourceType": "com.collaboportal.common.jwt.config.JwtConfig"
+    }
+  ],
+  "hints": []
+}

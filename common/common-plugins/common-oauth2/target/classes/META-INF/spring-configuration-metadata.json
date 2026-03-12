@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "oauth2",
+      "type": "com.collaboportal.common.oauth2.factory.OAuth2ClientRegistrationFactory",
+      "sourceType": "com.collaboportal.common.oauth2.factory.OAuth2ClientRegistrationFactory"
+    }
+  ],
+  "properties": [
+    {
+      "name": "oauth2.all-client-registrations",
+      "type": "java.util.Map<java.lang.String,com.collaboportal.common.oauth2.model.OAuth2ClientRegistration>",
+      "sourceType": "com.collaboportal.common.oauth2.factory.OAuth2ClientRegistrationFactory"
+    },
+    {
+      "name": "oauth2.providers",
+      "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
+      "sourceType": "com.collaboportal.common.oauth2.factory.OAuth2ClientRegistrationFactory"
+    }
+  ],
+  "hints": []
+}

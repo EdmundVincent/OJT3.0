@@ -1,0 +1,2 @@
+com.collaboportal.common.spring.ContextRegister
+com.collaboportal.common.config.ContextBeanInjection
