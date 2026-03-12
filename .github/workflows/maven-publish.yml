@@ -1,8 +1,10 @@
 name: Maven Package
 
 on:
-  release:
-    types: [edited]
+  push:
+    branches:
+      - main
+      - 'release/*'
 
 jobs:
   build:
