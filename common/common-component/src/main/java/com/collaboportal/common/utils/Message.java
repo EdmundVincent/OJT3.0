@@ -77,6 +77,7 @@ public class Message {
 		/** ログインID */
 		public static final String ID = "ID";
 
+		public static final String xxx ="xXX";
 		/** デバイス登録削除呼び出し */
 		public static final String LOGINED = "LOGINED";
 

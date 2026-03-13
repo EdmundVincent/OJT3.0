@@ -28,12 +28,17 @@
             </dependency>
 
  
-            <dependency>
+            <!-- <dependency>
                 <groupId>com.collaboportal</groupId>
                 <artifactId>common-component</artifactId>
                 <version>${revision}</version>
-            </dependency>
+            </dependency> -->
 
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <dependency>
                 <groupId>com.collaboportal</groupId>
                 <artifactId>common-jwt</artifactId>
