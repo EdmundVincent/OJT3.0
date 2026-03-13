@@ -18,7 +18,10 @@
 		<module>common-starter</module>
 		<module>common-plugins</module>
 	</modules>
-	
+	<repository>
+  <id>github</id>
+  <url>https://github.com/WSPlXA/common.git</url>
+</repository>
 	<!-- いくつかのプロパティ -->
 	<properties>
         <revision>SNAPSHOT-1.0.0</revision>
