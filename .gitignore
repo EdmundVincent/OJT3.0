@@ -1,0 +1,85 @@
+# =========================
+# Maven
+# =========================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE
+# =========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# VSCode
+.vscode/
+
+# =========================
+# Java compiled files
+# =========================
+*.class
+
+# =========================
+# Package files
+# =========================
+*.jar
+*.war
+*.ear
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+
+# =========================
+# Environment files
+# =========================
+.env
+.env.local
+
+# =========================
+# Test output
+# =========================
+surefire-reports/
+failsafe-reports/
+
+# =========================
+# Build tools
+# =========================
+.gradle/
+build/
+
+# =========================
+# Node (如果前端在同项目)
+# =========================
+node_modules/
+dist/
