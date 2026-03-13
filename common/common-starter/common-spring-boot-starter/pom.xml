@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+        <groupId>com.collaboportal</groupId>
+        <artifactId>common-starter</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>common-spring-boot-starter</artifactId>
+    <packaging>jar</packaging>
+	<name>common-spring-boot-starter</name>
+	<description>Spring Boot 3 Starter for CollabPortal Common Components</description>
+    
+	<dependencies>
+		<!-- Spring Boot Web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!-- Spring Boot Configuration Processor -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- Common Spring Boot AutoConfig -->
+		<dependency>
+			<groupId>com.collaboportal</groupId>
+			<artifactId>common-spring-boot-autoconfig</artifactId>
+		</dependency>
+
+		<dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-oauth2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-login</artifactId>
+        </dependency>
+
+		
+		<!-- Common Component -->
+		<dependency>
+			<groupId>com.collaboportal</groupId>
+			<artifactId>common-component</artifactId>
+		</dependency>
+
+		<!-- Common JWT -->
+		<dependency>
+			<groupId>com.collaboportal</groupId>
+			<artifactId>common-jwt</artifactId>
+		</dependency>
+
+		<!-- Spring Boot Starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Spring Web MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- Common Jakarta Servlet -->
+		<dependency>
+			<groupId>com.collaboportal</groupId>
+			<artifactId>common-jakarta-servlet</artifactId>
+			<version>${revision}</version>
+		</dependency>
+
+		<!-- Jackson Databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+	</dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

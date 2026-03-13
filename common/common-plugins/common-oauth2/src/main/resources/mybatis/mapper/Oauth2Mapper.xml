@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.collaboportal.common.oauth2.repository.Oauth2Mapper">
+
+  <resultMap id="UserMasterCollaboMap"
+             type="com.collaboportal.common.oauth2.entity.DTO.UserMasterCollabo">
+
+    <id     column="I_USR_ID"        property="userId"/>
+    <result column="I_MAIL_ADRS"      property="userMail"/>
+    <result column="I_ROLE"           property="role"/>
+    <result column="I_KIKAKU_ID_LIST" property="projectId"/>
+    <result column="I_USER_NAME"      property="userName"/>
+    <result column="I_YKS_COD"        property="jobCode"/>
+    <result column="I_KSH_NO"         property="companyCode"/>
+    <result column="I_SZK_BNO_KHS"    property="departmentCode"/>
+    <result column="I_SZK_STN_NO_KHS" property="branchCode"/>
+    <result column="I_SZK_KNO_KHS"    property="sectionCode"/>
+  </resultMap>
+
+
+  <select id="findUserMasterByEmail"
+          parameterType="string"
+          resultMap="UserMasterCollaboMap">
+    SELECT TOP (1)
+        s.I_USR_ID,
+        m.I_ROLE,
+        m.I_KIKAKU_ID_LIST,
+        m.I_USER_NAME,
+        s.I_YKS_COD,
+        s.I_MAIL_ADRS,
+        s.I_KSH_NO,
+        s.I_SZK_BNO_KHS,
+        s.I_SZK_STN_NO_KHS,
+        s.I_SZK_KNO_KHS
+    FROM nouki_zaiko.MS_SYN AS s      
+    LEFT JOIN sp_nohin.MS_RIYOUSYA AS m
+           ON m.I_USER_ID = s.I_USR_ID 
+    WHERE s.I_MAIL_ADRS = #{userMail} 
+  </select>
+
+</mapper>
