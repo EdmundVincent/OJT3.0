@@ -14,7 +14,6 @@ import com.collaboportal.common.config.LogMaskConfig;
 import com.collaboportal.common.config.PositionCodeConfig;
 import com.collaboportal.common.context.CommonContext;
 import com.collaboportal.common.exception.PageNotFoundException;
-import com.collaboportal.common.filter.LogTraceIdFilter;
 
 /**
  * 設定管理クラス
@@ -79,39 +78,8 @@ public class ConfigManager {
         return getConfig(PositionCodeConfig.class);
     }
 
-    // ログトレースIDフィルタの登録Bean
-    private volatile static FilterRegistrationBean<LogTraceIdFilter> logTraceIdFilterBean;
     // ログブックフィルタの登録Bean
     private volatile static FilterRegistrationBean<LogbookFilter> logbookFilterBean;
-
-    /**
-     * ログトレースIDフィルタを取得する
-     *
-     * @return LogTraceIdFilter インスタンス
-     */
-    public static LogTraceIdFilter getLogTraceIdFilter() {
-        if (logTraceIdFilterBean == null) {
-            synchronized (ConfigManager.class) {
-                if (logTraceIdFilterBean == null) {
-                    FilterRegistrationBean<LogTraceIdFilter> bean = new FilterRegistrationBean<>();
-                    bean.setFilter(new LogTraceIdFilter());
-                    bean.addUrlPatterns("/*");
-                    bean.setOrder(1);
-                    setLogTraceIdFilter(bean);
-                }
-            }
-        }
-        return logTraceIdFilterBean.getFilter();
-    }
-
-    /**
-     * ログトレースIDフィルタを設定する
-     *
-     * @param filter 設定するフィルタ
-     */
-    public static void setLogTraceIdFilter(FilterRegistrationBean<LogTraceIdFilter> filter) {
-        logTraceIdFilterBean = filter;
-    }
 
     /**
      * ログブックフィルタを取得する
