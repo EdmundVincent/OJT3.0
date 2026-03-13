@@ -29,6 +29,7 @@ jobs:
         run: mvn -B package --file ./common/pom.xml
 
       - name: Publish to GitHub Packages
-        run: mvn -B deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn -B deploy --file ./common/pom.xml -s $GITHUB_WORKSPACE/common/settings.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_ACTOR: ${{ github.actor }}
