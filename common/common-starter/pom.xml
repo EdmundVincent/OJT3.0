@@ -35,7 +35,25 @@
 
             <dependency>
                 <groupId>com.collaboportal</groupId>
-                <artifactId>common-component</artifactId>
+                <artifactId>common-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-runtime</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-security-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             

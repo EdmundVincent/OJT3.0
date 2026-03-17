@@ -38,6 +38,21 @@
 
 		<dependency>
             <groupId>com.collaboportal</groupId>
+            <artifactId>common-web</artifactId>
+        </dependency>
+
+		<dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-security-core</artifactId>
+        </dependency>
+
+		<dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-jwt</artifactId>
+        </dependency>
+
+		<dependency>
+            <groupId>com.collaboportal</groupId>
             <artifactId>common-oauth2</artifactId>
         </dependency>
 
@@ -45,19 +60,6 @@
             <groupId>com.collaboportal</groupId>
             <artifactId>common-login</artifactId>
         </dependency>
-
-		
-		<!-- Common Component -->
-		<dependency>
-			<groupId>com.collaboportal</groupId>
-			<artifactId>common-component</artifactId>
-		</dependency>
-
-		<!-- Common JWT -->
-		<dependency>
-			<groupId>com.collaboportal</groupId>
-			<artifactId>common-jwt</artifactId>
-		</dependency>
 
 		<!-- Spring Boot Starter -->
 		<dependency>

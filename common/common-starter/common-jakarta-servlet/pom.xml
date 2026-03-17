@@ -20,7 +20,11 @@
 
 		<dependency>
             <groupId>com.collaboportal</groupId>
-            <artifactId>common-component</artifactId>
+            <artifactId>common-api</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-runtime</artifactId>
         </dependency>
         
         <!-- Servlet API -->

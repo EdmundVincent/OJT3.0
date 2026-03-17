@@ -17,10 +17,19 @@
     <description>Common Spring Boot Auto Configuration for CollabPortal</description>
 
     <dependencies>
-        <!-- Common Component -->
         <dependency>
             <groupId>com.collaboportal</groupId>
-            <artifactId>common-component</artifactId>
+            <artifactId>common-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-security-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-runtime</artifactId>
         </dependency>
 
         <!-- Common OAuth2 -->

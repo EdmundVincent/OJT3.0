@@ -13,10 +13,21 @@
 
 	<modules>
 		<module>common-dependencies</module>
-		<module>common-component</module>
 		<module>common-bom</module>
+		<module>common-api</module>
+		<module>common-runtime</module>
+		<module>common-security-core</module>
+		<module>common-web</module>
+		<module>common-buffer</module>
+		<module>common-observe</module>
+		<module>common-audit</module>
+		<module>common-resource</module>
+		<module>common-database</module>
+		<module>common-redis</module>
+		<module>common-plugins/common-jwt</module>
+		<module>common-plugins/common-oauth2</module>
+		<module>common-plugins/common-login</module>
 		<module>common-starter</module>
-		<module>common-plugins</module>
 	</modules>
 
 	<!-- いくつかのプロパティ -->

@@ -6,13 +6,10 @@ import com.collaboportal.common.context.CommonHolder;
 import com.collaboportal.common.filter.AuthorizationServletFilter;
 import com.collaboportal.common.jwt.utils.CookieUtil;
 import com.collaboportal.common.model.VO.MoveUrl;
-import com.collaboportal.common.registry.AuthorizationStrategyRegistry;
 import com.collaboportal.common.strategy.CorsHandleFunction;
-import com.collaboportal.common.strategy.authorization.AuthorizationStrategy;
+import com.collaboportal.common.security.core.dispatcher.AuthDispatcher;
 import com.collaboportal.common.utils.Message;
 
-import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +22,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CommonAuthConfiguration implements WebMvcConfigurer {
 
     Logger logger = LoggerFactory.getLogger(CommonAuthConfiguration.class);
-    private static final Map<String, String> AUTH_ALIAS = Map.of(
-            "database-bypass", "database",
-            "oauth2-bypass", "oauth2");
 
     @Bean
     public AuthorizationServletFilter getAuthorizationServletFilter(
-            AuthorizationStrategyRegistry strategyRegistry,
+            AuthDispatcher dispatcher,
             CorsHandleFunction corsHandleFunction) {
 
         return new AuthorizationServletFilter()
@@ -80,16 +74,7 @@ public class CommonAuthConfiguration implements WebMvcConfigurer {
                         CookieUtil.setNoneSameSiteCookieWithLongTemp(resp, Message.Cookie.PARAMETER_NAME_H, h);
                     }
                 })
-                .setAuth((res, resp) -> {
-                    String authorizationType = normalizeAuthorizationType(
-                            CommonHolder.getRequest().getHeader("Authorization-Type"));
-
-                    AuthorizationStrategy strategy = strategyRegistry.getStrategy(authorizationType);
-                    if (strategy == null) {
-                        throw new UnsupportedOperationException("サポートされていない認証タイプ: " + authorizationType);
-                    }
-                    strategy.authenticate(CommonHolder.getRequest(), CommonHolder.getResponse());
-                });
+                .setDispatcher(dispatcher);
 
     }
 
@@ -112,11 +97,4 @@ public class CommonAuthConfiguration implements WebMvcConfigurer {
 
     }
 
-    private String normalizeAuthorizationType(String original) {
-        if (original == null) {
-            return null;
-        }
-        String normalized = original.trim().toLowerCase(Locale.ROOT);
-        return AUTH_ALIAS.getOrDefault(normalized, normalized);
-    }
 }
