@@ -1,12 +1,5 @@
 package com.collaboportal.common.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class SystemSettingsResponseBody extends BaseResponseBody {
 
     /** パスワード変更URL */
@@ -14,4 +7,22 @@ public class SystemSettingsResponseBody extends BaseResponseBody {
 
     /** ログアウトURL */
     private String logout_url;
+
+    public SystemSettingsResponseBody() {
+        super();
+    }
+
+    public SystemSettingsResponseBody(String pass_change_url, String logout_url) {
+        super();
+        this.pass_change_url = pass_change_url;
+        this.logout_url = logout_url;
+    }
+
+    public String getPass_change_url() {
+        return pass_change_url;
+    }
+
+    public String getLogout_url() {
+        return logout_url;
+    }
 }

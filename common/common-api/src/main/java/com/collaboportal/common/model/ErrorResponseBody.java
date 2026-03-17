@@ -1,15 +1,13 @@
 package com.collaboportal.common.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 /**
  * エラーレスポンス用のボディクラス
  * BaseResponseBodyを継承し、エラー情報を保持する
  */
-@Getter
-@NoArgsConstructor
 public class ErrorResponseBody extends BaseResponseBody {
+	public ErrorResponseBody() {
+		super();
+	}
 	/**
 	 * コンストラクタ
 	 * @param nb_err_cod 内部エラーコード

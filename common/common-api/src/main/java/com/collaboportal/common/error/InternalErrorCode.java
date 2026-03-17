@@ -1,13 +1,10 @@
 package com.collaboportal.common.error;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /**
  * 内部エラーコードを定義する列挙型
  * 各エラーコードはエラーメッセージとエラーIDを持つ
  */
-@AllArgsConstructor
 public enum InternalErrorCode {
     // 未定義エラー
     UNDEINED_ERROR(500, "Undefined", "ERROR_ID_000"),
@@ -69,15 +66,30 @@ public enum InternalErrorCode {
     RETURN_QUANTITY_INVALID_ERROR(4006, "ReturnQuantitiyInvalidException", "ERROR_ID_425");
     // 状況一覧 END
 
-    @Getter
     private final Integer internalErrorCode;
     // エラーメッセージ
-    @Getter
     private final String errorMessage;
 
     // エラーID
-    @Getter
     private final String errorId;
+
+    InternalErrorCode(Integer internalErrorCode, String errorMessage, String errorId) {
+        this.internalErrorCode = internalErrorCode;
+        this.errorMessage = errorMessage;
+        this.errorId = errorId;
+    }
+
+    public Integer getInternalErrorCode() {
+        return internalErrorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public String getErrorId() {
+        return errorId;
+    }
 
     public boolean is4xxClientError() {
         return (this.getInternalErrorCode() % 100 == 4);
