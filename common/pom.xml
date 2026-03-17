@@ -50,7 +50,7 @@
 		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
 	</properties>
 
-		<dependencyManagement>
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.collaboportal</groupId>
@@ -58,6 +58,81 @@
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-api</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-runtime</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-security-core</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-web</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-buffer</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-observe</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-audit</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-resource</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-database</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-redis</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-jwt</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-oauth2</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-login</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-spring-boot-autoconfig</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.collaboportal</groupId>
+				<artifactId>common-spring-boot-starter</artifactId>
+				<version>${revision}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
