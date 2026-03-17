@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.collaboportal</groupId>
+    <artifactId>common-starter</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <groupId>com.collaboportal</groupId>
+  <artifactId>common-jakarta-servlet</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>common-jakarta-servlet</name>
+  <description>common-jakarta-servlet</description>
+  <dependencies>
+    <dependency>
+      <groupId>com.collaboportal</groupId>
+      <artifactId>common-component-core</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.collaboportal</groupId>
+      <artifactId>common-component-infra</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+    </dependency>
+  </dependencies>
+</project>

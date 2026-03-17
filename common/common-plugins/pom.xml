@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>com.collaboportal</groupId>
+        <artifactId>common-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>common-plugins</artifactId>
+    <packaging>pom</packaging>
+    <name>common-plugins</name>
+    <description>Common Plugins for CollabPortal</description>
+    
+    <modules>
+        <module>common-jwt</module>
+        <module>common-oauth2</module>
+        <module>common-login</module>
+        <module>common-database</module>
+    </modules>
+
+        <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-dependencies</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+  
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-component-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-component-config</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-component-infra</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-component-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-jwt</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.collaboportal</groupId>
+                <artifactId>common-oauth2</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Spring Boot Configuration Processor -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
