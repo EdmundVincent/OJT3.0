@@ -5,7 +5,6 @@ import com.collaboportal.common.config.PositionCodeConfig;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.MockedStatic;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -13,19 +12,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PositionCodeResolverTest {
-
-    private MockedStatic<ConfigManager> mockedConfigManager;
 
     @BeforeAll
     void beforeAll() {
         // PositionCodeResolverの静的初期化ブロックで読み込まれる設定をモックで定義する。
         // can(変更可否): 1=不可, 0=可 (フロントエンドの表示制御に合わせる)
         // show(表示): 1=可, 0=不可
-        PositionCodeConfig mockPositionCodeConfig = mock(PositionCodeConfig.class);
         Map<String, String> rules = new HashMap<>();
 
         // --- application-common.properties から読み込んだ本番ルール ---
@@ -47,15 +42,8 @@ class PositionCodeResolverTest {
         rules.put("bad_format", "1,1,1|1,1,1");             // 不正なフォーマット (要素数不足)
         rules.put("bad_format_no_pipe", "1,1,1,1,1");       // 不正なフォーマット (パイプなし)
 
-        when(mockPositionCodeConfig.getRules()).thenReturn(rules);
-
-        mockedConfigManager = mockStatic(ConfigManager.class);
-        when(ConfigManager.getPositionCodeConfig()).thenReturn(mockPositionCodeConfig);
-    }
-
-    @AfterAll
-    void afterAll() {
-        mockedConfigManager.close();
+        PositionCodeConfig positionCodeConfig = new PositionCodeConfig().setRules(rules);
+        ConfigManager.setConfig(positionCodeConfig);
     }
 
     @BeforeEach
