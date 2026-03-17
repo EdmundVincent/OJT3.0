@@ -26,9 +26,8 @@ import java.security.Key;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import com.collaboportal.common.context.CommonHolder;
+import com.collaboportal.common.context.web.BaseRequest;
 import com.collaboportal.common.jwt.config.JwtConfig;
 
 /**
@@ -197,10 +196,15 @@ public class CustomJwtStrategies implements CommandLineRunner {
                                 return false;
                         }
 
-                        // HttpServletRequestを取得
-                        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-                                        .getRequestAttributes()).getRequest();
-                        String requestUri = request.getRequestURI();
+                        // BaseRequestを取得
+                        BaseRequest request = CommonHolder.getRequest();
+                        if (request == null) {
+                                return true;
+                        }
+                        String requestUri = request.getRequestPath();
+                        if (requestUri == null) {
+                                return true;
+                        }
 
                         // URLの最後のセグメントを取得
                         String endpoint = requestUri.substring(requestUri.lastIndexOf('/') + 1);
