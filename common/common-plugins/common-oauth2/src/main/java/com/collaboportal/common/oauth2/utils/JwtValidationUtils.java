@@ -13,7 +13,6 @@ import com.collaboportal.common.context.web.BaseCookie;
 import com.collaboportal.common.context.web.BaseRequest;
 import com.collaboportal.common.context.web.BaseResponse;
 import com.collaboportal.common.oauth2.context.OAuth2ProviderContext;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * JWT検証ユーティリティクラス
@@ -87,27 +86,47 @@ public class JwtValidationUtils {
         if (!authorizationEndpoint.startsWith("http://") && !authorizationEndpoint.startsWith("https://")) {
             authorizationEndpoint = "https://" + authorizationEndpoint;
         }
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(authorizationEndpoint)
-                .path("/authorize")
-                .queryParam("client_id", context.getClientId())
-                .queryParam("redirect_uri", context.getRedirectUri())
-                .queryParam("response_type", "code")
-                .queryParam("response_mode", "query");
+        String base = authorizationEndpoint.endsWith("/")
+                ? authorizationEndpoint.substring(0, authorizationEndpoint.length() - 1)
+                : authorizationEndpoint;
 
         String scope = context.getScope();
         if (scope == null || scope.isBlank()) {
             scope = "openid profile email offline_access";
         }
-        builder.queryParam("scope", scope);
 
+        StringBuilder builder = new StringBuilder(base).append("/authorize");
+        appendParam(builder, "client_id", context.getClientId());
+        appendParam(builder, "redirect_uri", context.getRedirectUri());
+        appendParam(builder, "response_type", "code");
+        appendParam(builder, "response_mode", "query");
+        appendParam(builder, "scope", scope);
         if (context.getAudience() != null && !context.getAudience().isBlank()) {
-            builder.queryParam("audience", context.getAudience());
+            appendParam(builder, "audience", context.getAudience());
         }
         if (context.getState() != null && !context.getState().isBlank()) {
-            builder.queryParam("state", context.getState());
+            appendParam(builder, "state", context.getState());
         }
-        return builder.build().toUriString();
+        return builder.toString();
+    }
+
+    private static void appendParam(StringBuilder builder, String key, String value) {
+        if (value == null) {
+            return;
+        }
+        char separator = builder.indexOf("?") >= 0 ? '&' : '?';
+        builder.append(separator)
+                .append(urlEncode(key))
+                .append('=')
+                .append(urlEncode(value));
+    }
+
+    private static String urlEncode(String value) {
+        try {
+            return java.net.URLEncoder.encode(value, java.nio.charset.StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            return value;
+        }
     }
 
     /**

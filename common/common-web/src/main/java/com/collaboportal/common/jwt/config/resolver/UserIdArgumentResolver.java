@@ -1,7 +1,11 @@
 package com.collaboportal.common.jwt.config.resolver;
 
+import com.collaboportal.common.context.CommonHolder;
 import com.collaboportal.common.exception.AuthenticationException;
-import com.collaboportal.common.jwt.utils.JwtClaimUtils;
+import com.collaboportal.common.security.core.context.AuthContext;
+import com.collaboportal.common.security.core.dispatcher.AuthDispatcher;
+import com.collaboportal.common.security.core.model.AuthRequest;
+import com.collaboportal.common.security.core.model.AuthResult;
 import com.collaboportal.common.utils.WebContextUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -14,6 +18,13 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final String AUTH_TOKEN_COOKIE_NAME = "AuthToken";
+    private static final String CLAIM_USER_ID = "userId";
+
+    private final AuthDispatcher dispatcher;
+
+    public UserIdArgumentResolver(AuthDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
+    }
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -33,7 +44,7 @@ public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
                 throw new AuthenticationException("認証トークンがリクエストに含まれていません。");
             }
 
-            String userId = JwtClaimUtils.get(authToken, "userId", String.class).orElse(null);
+            String userId = extractUserId(authToken);
 
             if (userId == null && isRequired) {
                 throw new AuthenticationException("認証トークンにユーザーIDが含まれていません。");
@@ -50,5 +61,26 @@ public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
             }
             return null;
         }
+    }
+
+    private String extractUserId(String authToken) {
+        AuthContext context = new AuthContext(CommonHolder.getRequest(), CommonHolder.getResponse());
+        AuthRequest request = AuthRequest.builder()
+                .type("jwt")
+                .action("claims")
+                .request(CommonHolder.getRequest())
+                .response(CommonHolder.getResponse())
+                .attribute("token", authToken)
+                .build();
+        AuthResult result = dispatcher.dispatch(request, context);
+        if (result == null || !result.isSuccess()) {
+            return null;
+        }
+        Object payload = result.getPayload();
+        if (payload instanceof java.util.Map<?, ?> map) {
+            Object value = map.get(CLAIM_USER_ID);
+            return value == null ? null : String.valueOf(value);
+        }
+        return null;
     }
 }
