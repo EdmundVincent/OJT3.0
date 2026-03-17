@@ -1,7 +1,7 @@
 package com.collaboportal.common.jwt.repository;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface LogMapper {
