@@ -2,11 +2,11 @@ package com.collaboportal.common.spring;
 
 import com.collaboportal.common.ConfigManager;
 import com.collaboportal.common.encoder.UserIdSaltedBCryptPasswordEncoder;
-import com.collaboportal.common.strategy.security.CsrfStrategy;
-import com.collaboportal.common.strategy.security.ExceptionHandlingStrategy;
-import com.collaboportal.common.strategy.security.FirewallStrategy;
-import com.collaboportal.common.strategy.security.SecurityConfigStrategy;
-import com.collaboportal.common.strategy.security.StatelessSessionStrategy;
+import com.collaboportal.common.strategy.CsrfStrategy;
+import com.collaboportal.common.strategy.ExceptionHandlingStrategy;
+import com.collaboportal.common.strategy.FirewallStrategy;
+import com.collaboportal.common.strategy.SecurityConfigStrategy;
+import com.collaboportal.common.strategy.StatelessSessionStrategy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

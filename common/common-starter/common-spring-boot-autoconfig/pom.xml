@@ -32,6 +32,11 @@
             <artifactId>common-runtime</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.collaboportal</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
+
         <!-- Common OAuth2 -->
         <dependency>
             <groupId>com.collaboportal</groupId>

@@ -1,6 +1,8 @@
 package com.collaboportal.common.servlet;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +30,9 @@ public class RequestForServlet implements BaseRequest {
 
 	// HttpServletRequestのインスタンス
 	protected HttpServletRequest request;
+	private final ServletZeroCopyReader zeroCopyReader = new ServletZeroCopyReader();
+	private byte[] cachedBody;
+	private boolean bodyLoaded;
 
 	/**
 	 * コンストラクタ
@@ -94,7 +99,17 @@ public class RequestForServlet implements BaseRequest {
 	 */
 	@Override
 	public String getHeader(String name) {
-		return request.getHeader(name);
+		byte[] headerBytes = getHeaderBytes(name);
+		return headerBytes == null ? null : new String(headerBytes, StandardCharsets.UTF_8);
+	}
+
+	@Override
+	public byte[] getHeaderBytes(String name) {
+		String headerValue = request.getHeader(name);
+		if (headerValue == null) {
+			return null;
+		}
+		return zeroCopyReader.read(ByteBuffer.wrap(headerValue.getBytes(StandardCharsets.UTF_8)));
 	}
 
 	/**
@@ -214,5 +229,26 @@ public class RequestForServlet implements BaseRequest {
 	@Override
 	public String getMethod() {
 		return request.getMethod();
+	}
+
+	@Override
+	public byte[] getBodyBytes() {
+		if (bodyLoaded) {
+			return cachedBody == null ? null : cachedBody.clone();
+		}
+		try {
+			byte[] source = request.getInputStream().readAllBytes();
+			cachedBody = zeroCopyReader.read(ByteBuffer.wrap(source));
+			bodyLoaded = true;
+			return cachedBody.clone();
+		} catch (IOException e) {
+			throw new CommonException(InternalErrorCode.SYSTEM_ERROR);
+		}
+	}
+
+	@Override
+	public String getBody() {
+		byte[] body = getBodyBytes();
+		return body == null ? null : new String(body, StandardCharsets.UTF_8);
 	}
 }

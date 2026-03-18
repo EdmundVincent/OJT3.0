@@ -19,6 +19,10 @@
     <dependencies>
         <dependency>
             <groupId>com.collaboportal</groupId>
+            <artifactId>common-buffer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.collaboportal</groupId>
             <artifactId>common-api</artifactId>
         </dependency>
         <dependency>
@@ -73,6 +77,16 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

@@ -1,5 +1,6 @@
 package com.collaboportal.common.context.web;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
 
@@ -43,6 +44,12 @@ public interface BaseRequest {
 
 	// 指定したヘッダー名の値を取得
 	String getHeader(String name);
+
+	// 指定したヘッダー名の生バイト列を取得
+	default byte[] getHeaderBytes(String name) {
+		String value = getHeader(name);
+		return value == null ? null : value.getBytes(StandardCharsets.UTF_8);
+	}
 
 	// 指定したヘッダー名の値を取得。値が空またはnullの場合はデフォルト値を返す
 	default String getHeader(String name, String defaultValue) {
@@ -107,6 +114,25 @@ public interface BaseRequest {
 	 * @return /
 	 */
 	String getMethod();
+
+	/**
+	 * リクエストボディの生バイト列を取得
+	 * 
+	 * @return body bytes
+	 */
+	default byte[] getBodyBytes() {
+		return new byte[0];
+	}
+
+	/**
+	 * リクエストボディをUTF-8文字列として取得
+	 * 
+	 * @return body string
+	 */
+	default String getBody() {
+		byte[] bodyBytes = getBodyBytes();
+		return bodyBytes == null ? null : new String(bodyBytes, StandardCharsets.UTF_8);
+	}
 
 	/**
 	 * 現在のリクエストメソッドが指定値と一致するか判定
